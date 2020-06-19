@@ -1,3 +1,4 @@
-.env
-sessions/
+sessions
 followers.txt
+credentials.json
+.vscode
