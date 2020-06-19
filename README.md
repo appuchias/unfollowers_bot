@@ -9,5 +9,7 @@
  - Navigate to the folder you want the bot to be: `cd <folder path without these signs>`
  - Clone the repo: `git clone https://github.com/appuchias/unfollower_bot.git`
  - Install requirements: `pip install -r requirements.txt`
- - Run the setup file `(in development)`
- - Run the bot (Not done): `python main.py`
+ - Run the setup file: `setup_file.py`
+ - Run the bot (Not finished): `python main.py`
+
+# *Working on GUI, next updates won't probably work.*
