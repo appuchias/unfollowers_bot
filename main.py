@@ -1,10 +1,13 @@
 from igramscraper.exception.instagram_auth_exception import InstagramAuthException
 from igramscraper.instagram import Instagram
 import json, keyboard
-import interface
+from win10toast import ToastNotifier
+
+delay_mins = 60
+run_afk = True
 
 try:
-    with open("credentials.json", "r") as r:
+    with open("files/credentials.json", "r") as r:
         credentials = json.load(r)
         login_username = credentials["login_username"]
         login_password = credentials["login_password"]
@@ -18,44 +21,39 @@ ig = Instagram()
 ig.with_credentials(login_username, login_password)
 ig.login(force=False)
 account = ig.get_account(username)
+toaster = ToastNotifier()
 
-print(1)
+def get_updates(account):
+    try:
+        followers = ig.get_followers(account.identifier, 150, 100, delayed=True)["accounts"] # Get all the followers
+        followers_usernames = [follower.username for follower in followers]
+    except InstagramAuthException:
+        print("Rate limited! Wait before retrying")
 
-try:
-    followers = ig.get_followers(account.identifier, 150, 100, delayed=True)["accounts"]
-except InstagramAuthException:
-    print("Rate limited! Wait before retrying")
+    try:
+        with open("files/followers.txt") as r:
+            users = [user.strip(" '") for user in r.read().strip("[]").split("', '")]
+    except FileNotFoundError:
+        users = []
 
-try:
-    with open("followers.txt") as r:
-        users = [user.strip(" '") for user in r.read().strip("[]").split("', '")]
-except FileNotFoundError:
-    users = []
+    new_followers = []
+    new_unfollowers = []
 
-new_followers = []
-new_unfollowers = []
+    if len(users) > 1:
+        for follower in followers:
+            if follower.username not in users:
+                new_followers.append(follower)
+                toaster.show_toast("New follower:", follower.username)
 
-print(1)
+        for user in users:
+            if user not in followers_usernames:
+                new_unfollowers.append(follower)
+                toaster.show_toast("New unfollower:", user)
 
-if len(users) > 1:
-    for follower in followers:
-        if follower.username not in users:
-            new_followers.append(follower)
+    with open("files/followers.txt", "w") as w:
+        w.write(str(followers_usernames))
 
-    for user in users:
-        if user not in [follower.username for follower in followers]:
-            new_unfollowers.append(follower)
+    print([follower.username for follower in new_followers],
+        [unfollower.username for unfollower in new_unfollowers])
 
-print(1)
-
-with open("followers.txt", "w") as w:
-    w.write(str(followers))
-
-print(new_followers, new_unfollowers)
-
-print("Program finished")
-
-gui = interface.Interface()
-gui.get_followers(new_followers)
-gui.get_unfollowers(new_unfollowers)
-gui.run()
+get_updates(account)
