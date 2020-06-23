@@ -15,4 +15,4 @@ This bot runs in background, which means you can be using any other app while th
  - Navigate to the created folder with the repo: `cd unfollower_bot`
  - Install requirements: `pip install -r requirements.txt`
  - Run the setup file: `setup_file.py`
- - Run the bot: `python main.py`
+ - Run the bot: `python main.pyw`
