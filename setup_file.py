@@ -1,17 +1,19 @@
-import json
+import json, os
+
+os.system("mkdir files")
 
 try:
-    with open("credenciales.json", "r+") as r:
+    with open("filescredenciales.json", "r+") as r:
         if len(r.read()) > 2:
             print("El archivo con las credenciales ya existe. Los cambios sobreescribirán lo guardado anteriormente")
         else:
             r.write("{}")
 except:
-    file = open("credenciales.json", "w")
+    file = open("files/credenciales.json", "w")
     file.write("{}")
     file.close()
 
-with open("credenciales.json") as r:
+with open("files/credenciales.json") as r:
     credentials = json.load(r)
 
 credentials["login_username"] = input(
@@ -21,5 +23,5 @@ credentials["login_password"] = input(
 credentials["username"] = input(
     "Cuenta de la que revisar los seguidores:\n> ")
 
-with open("credenciales.json", "w") as w:
+with open("files/credenciales.json", "w") as w:
     json.dump(credentials, w, indent=4)

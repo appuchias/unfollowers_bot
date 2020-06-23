@@ -1,13 +1,12 @@
 from igramscraper.exception.instagram_auth_exception import InstagramAuthException
 from igramscraper.instagram import Instagram
 from win10toast import ToastNotifier
-import json, threading, os, tray_icon
+import json, threading, tray_icon
 from time import sleep
 
 toaster = ToastNotifier()
 
 delay_mins = 40
-os.system("mkdir files")
 
 # Get the credentials and username of the account to track
 try:
@@ -17,14 +16,14 @@ try:
         login_password = credentials["login_password"]
         username = credentials["username"]
 except:
-    toaster.show_toast("Error!", "Ejecuta setup_file.py antes de main! (credenciales.json no)")
+    toaster.show_toast("Error!", "Ejecuta setup_file.py antes de main! (credenciales.json no existe)")
 
 assert len(login_username) or len(login_password) or len(username), "Error obteniendo las credenciales del archivo"
 
 # Instagram related stuff
 ig = Instagram()
 ig.with_credentials(login_username, login_password)
-ig.login(force=False)
+ig.login()
 account = ig.get_account(username)
 
 # Checker function
@@ -76,11 +75,13 @@ def get_updates(account):
             else:
                 a.write("\nNinguno")
 
-# Main code
-tray_icon_thread = threading.Thread(target=tray_icon.main)
-tray_icon_thread.start()
+def main():
+    global delay_mins
+    while True:
+        get_updates(account)
+        sleep(delay_mins*60)
 
-while True:
-    get_updates_thread = threading.Thread(target=get_updates, args=(account, ))
-    get_updates_thread.start()
-    sleep(delay_mins*60)
+# Main code
+if __name__ == "__main__":
+    tray_icon.main()
+    main()

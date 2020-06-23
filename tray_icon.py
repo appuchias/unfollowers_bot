@@ -1,7 +1,7 @@
 import wx.adv
 import wx
 import win10toast
-import sys
+import os
 TRAY_TOOLTIP = 'InstaBot'
 TRAY_ICON = 'icon.png'
 
@@ -31,9 +31,6 @@ class TaskBarIcon(wx.adv.TaskBarIcon):
         icon = wx.Icon(path)
         self.SetIcon(icon, TRAY_TOOLTIP)
 
-    def on_left_down(self, event):
-        pass
-
     def get_info(self, event):
         toaster = win10toast.ToastNotifier()
         try:
@@ -45,12 +42,14 @@ class TaskBarIcon(wx.adv.TaskBarIcon):
             toaster.show_toast("Error!", "Espera a que el archivo sea creado")
         except IndexError:
             toaster.show_toast("Error!", "Error leyendo el archivo")
+        os.system("python tray_icon.pyw")
+
+    def on_left_down(self, event):
+        self.get_info(event)
 
     def exit(self, event):
         wx.CallAfter(self.Destroy)
         self.frame.Close()
-        sys.exit(0)
-
 
 class App(wx.App):
     def OnInit(self):
