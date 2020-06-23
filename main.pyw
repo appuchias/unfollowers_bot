@@ -4,11 +4,12 @@ from win10toast import ToastNotifier
 import json, threading, os, tray_icon
 from time import sleep
 
-delay_mins = 40
 toaster = ToastNotifier()
 
+delay_mins = 40
 os.system("mkdir files")
 
+# Get the credentials and username of the account to track
 try:
     with open("files/credenciales.json", "r") as r:
         credentials = json.load(r)
@@ -20,11 +21,13 @@ except:
 
 assert len(login_username) or len(login_password) or len(username), "Error obteniendo las credenciales del archivo"
 
+# Instagram related stuff
 ig = Instagram()
 ig.with_credentials(login_username, login_password)
 ig.login(force=False)
 account = ig.get_account(username)
 
+# Checker function
 def get_updates(account):
     try:
         followers = ig.get_followers(account.identifier, 150, 100, delayed=True)["accounts"] # Get all the followers
