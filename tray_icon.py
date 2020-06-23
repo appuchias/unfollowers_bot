@@ -24,7 +24,7 @@ class TaskBarIcon(wx.adv.TaskBarIcon):
         menu = wx.Menu()
         create_menu_item(menu, 'Info', self.get_info)
         menu.AppendSeparator()
-        create_menu_item(menu, 'Exit', self.exit)
+        create_menu_item(menu, 'Cerrar', self.exit)
         return menu
 
     def set_icon(self, path):
@@ -42,9 +42,9 @@ class TaskBarIcon(wx.adv.TaskBarIcon):
                 toaster.show_toast("Recent followers:", news[0] if len(news[0]) > 1 else "Ninguno")
                 toaster.show_toast("Recent unfollowers:", news[1] if len(news[1]) > 1 else "Ninguno")
         except FileNotFoundError:
-            print("Wait until file is created")
+            toaster.show_toast("Error!", "Espera a que el archivo sea creado")
         except IndexError:
-            print("Error while reading the file. Please wait")
+            toaster.show_toast("Error!", "Error leyendo el archivo")
 
     def exit(self, event):
         wx.CallAfter(self.Destroy)

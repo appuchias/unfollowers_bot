@@ -1,11 +1,13 @@
 from igramscraper.exception.instagram_auth_exception import InstagramAuthException
 from igramscraper.instagram import Instagram
 from win10toast import ToastNotifier
-import json, threading, tray_icon
+import json, threading, os, tray_icon
 from time import sleep
 
 delay_mins = 40
 toaster = ToastNotifier()
+
+os.system("mkdir files")
 
 try:
     with open("files/credenciales.json", "r") as r:
@@ -28,7 +30,7 @@ def get_updates(account):
         followers = ig.get_followers(account.identifier, 150, 100, delayed=True)["accounts"] # Get all the followers
         followers_usernames = [follower.username for follower in followers]
     except InstagramAuthException:
-        toaster.show_toast("Error!", "Rate limited! Wait before retrying")
+        toaster.show_toast("Error!", "Demasiadas peticiones! Espera antes de reintentarlo")
 
     try:
         with open("files/followers.txt") as r:
@@ -70,9 +72,6 @@ def get_updates(account):
                 a.write("\n" + str([unfollower.username for unfollower in new_unfollowers]).replace("[", "").replace("]", ""))
             else:
                 a.write("\nNinguno")
-    
-    print([follower.username for follower in new_followers],
-          [unfollower.username for unfollower in new_unfollowers])
 
 # Main code
 tray_icon_thread = threading.Thread(target=tray_icon.main)
