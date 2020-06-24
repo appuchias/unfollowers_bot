@@ -1,7 +1,7 @@
 from igramscraper.exception.instagram_auth_exception import InstagramAuthException
 from igramscraper.instagram import Instagram
 from win10toast import ToastNotifier
-import json, threading, tray_icon
+import json, threading
 from time import sleep
 
 toaster = ToastNotifier()
@@ -66,12 +66,12 @@ def get_updates(account):
     finally:
         with open("files/recents.txt", "a") as a:
             if len(new_followers) >= 1:
-                a.write("\n" + str([follower.username for follower in new_followers]).replace("[", "").replace("]", ""))
+                a.write("\nFollow:" + str([follower.username for follower in new_followers]).replace("[", "").replace("]", ""))
             else:
                 a.write("\nNinguno")
 
             if len(new_unfollowers) >= 1:
-                a.write("\n" + str([unfollower.username for unfollower in new_unfollowers]).replace("[", "").replace("]", ""))
+                a.write("\nUnfollow:" + str([unfollower.username for unfollower in new_unfollowers]).replace("[", "").replace("]", ""))
             else:
                 a.write("\nNinguno")
 
