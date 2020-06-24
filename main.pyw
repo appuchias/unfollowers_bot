@@ -75,13 +75,6 @@ def get_updates(account):
             else:
                 a.write("\nNinguno")
 
-def main():
-    global delay_mins
-    while True:
-        get_updates(account)
-        sleep(delay_mins*60)
-
-# Main code
-if __name__ == "__main__":
-    tray_icon.main()
-    main()
+while True:
+    get_updates(account)
+    sleep(delay_mins*60)
