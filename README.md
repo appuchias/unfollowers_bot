@@ -2,6 +2,9 @@
 [![MIT license](https://img.shields.io/github/license/appuchias/unfollowers_bot?style=flat-square)](
 https://github.com/appuchias/unfollowers_bot/blob/master/LICENSE)
 
+[![Author](https://img.shields.io/badge/Project%20by-Appu-9cf)](
+https://github.com/appuchias)
+
 
 ### Use this bot to monitor your followers and receive notifications on changes.
 
