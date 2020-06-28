@@ -1,4 +1,7 @@
 # **Unfollower bot**
+[![MIT license](https://img.shields.io/github/license/appuchias/unfollowers_bot?style=flat-square)](
+https://github.com/appuchias/unfollowers_bot/blob/master/LICENSE)
+
 
 ### Use this bot to monitor your followers and receive notifications on changes.
 
