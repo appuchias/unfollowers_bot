@@ -8,7 +8,8 @@ https://github.com/appuchias)
 ### Use this bot to monitor your followers and receive notifications on changes.
 
 ## **Functionality**
-This bot runs in background, which means you can be using any other app while this script simply checks for changes in your followers. Once it finds them, it will show a notification explaining what it found. It also includes a tray icon to terminate the program or look for the latest info gathered from the script.
+This bot runs in background, which means you can be using any other app while this script simply checks for changes in your followers.\
+~~Once it finds them, it will show a notification explaining what it found. It also includes a tray icon to terminate the program or look for the latest info gathered from the script.~~
 
 *May be unstable. Bugs to be found*
 
