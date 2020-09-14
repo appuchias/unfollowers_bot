@@ -1,3 +1,5 @@
 sessions
-files
 .env
+
+followers.txt
+unfollowers.txt
