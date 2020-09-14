@@ -14,14 +14,14 @@ def main():
         uname = input("Username to track:\n> ")
 
         with open(".env", "w") as w:
-            w.write("LOGIN={}\nPWD={}\nUNAME={}".format(login, pwd, uname))
+            w.write("LOGIN={}\nPASSWORD={}\nUSERNAME={}".format(login, pwd, uname))
 
     else:
         load_dotenv()
 
         login = os.getenv("LOGIN")
-        pwd = os.getenv("PWD")
-        uname = os.getenv("UNAME")
+        pwd = os.getenv("PASSWORD")
+        uname = os.getenv("USERNAME")
 
         print(
             "What do you want to modify?\n"
@@ -47,9 +47,10 @@ def main():
             uname = input("Username to track:\n> ")
         else:
             print("Please input a number between 1-3")
+            sys.exit(0)
 
         with open(".env", "w") as w:
-            w.write("LOGIN={}\nPWD={}\nUNAME={}".format(login, pwd, uname))
+            w.write("LOGIN={}\nPASSWORD={}\nUSERNAME={}".format(login, pwd, uname))
     print("Done :)")
 
 
