@@ -8,26 +8,26 @@ def main():
     if not os.path.exists("./files/"):
         os.mkdir("files")
 
+    if not os.path.exists("./usernames.txt"):
+		open("usernames.txt", "x").close()
+
     if not os.path.exists(".env"):
         login = input("Login username:\n> ")
         pwd = input("Login password:\n> ")
-        uname = input("Username to track:\n> ")
 
         with open(".env", "w") as w:
-            w.write("LOGIN={}\nPASSWORD={}\nUSERNAME={}".format(login, pwd, uname))
+            w.write("LOGIN={}\nPASSWORD={}".format(login, pwd))
 
     else:
         load_dotenv()
 
         login = os.getenv("LOGIN")
         pwd = os.getenv("PASSWORD")
-        uname = os.getenv("USERNAME")
 
         print(
             "What do you want to modify?\n"
             + "  [1] - Login username\n"
-            + "  [2] - Login password\n"
-            + "  [3] - Username to track\n\n"
+            + "  [2] - Login password\n\n"
             + "  [Press CTRL+C to exit]"
         )
         try:
@@ -43,14 +43,12 @@ def main():
             login = input("Login username:\n> ")
         elif selection == 2:
             pwd = input("Login password:\n> ")
-        elif selection == 3:
-            uname = input("Username to track:\n> ")
         else:
-            print("Please input a number between 1-3")
+            print("Please input a number between 1-2")
             sys.exit(0)
 
         with open(".env", "w") as w:
-            w.write("LOGIN={}\nPASSWORD={}\nUSERNAME={}".format(login, pwd, uname))
+            w.write("LOGIN={}\nPASSWORD={}".format(login, pwd))
     print("Done :)")
 
 
