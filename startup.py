@@ -9,7 +9,7 @@ def main():
         os.mkdir("files")
 
     if not os.path.exists("./usernames.txt"):
-		open("usernames.txt", "x").close()
+        open("usernames.txt", "x").close()
 
     if not os.path.exists(".env"):
         login = input("Login username:\n> ")
