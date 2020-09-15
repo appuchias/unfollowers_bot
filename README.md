@@ -1,3 +1,4 @@
+
 # **Unfollowers tracker**
 [![MIT license](https://img.shields.io/github/license/appuchias/unfollowers_tracker?style=flat-square)](https://github.com/appuchias/unfollowers_tracker/blob/master/LICENSE)
 [![Author](https://img.shields.io/badge/Project%20by-Appu-9cf?style=flat-square)](https://github.com/appuchias)
@@ -5,8 +6,8 @@
 
 # Work in progress. Unstable
 
-
-### Use this bot to monitor your followers and receive notifications on changes.
+```
+### Use this bot to monitor your followers  and receive notifications on changes.
 
 ## **Functionality**
 This bot runs in background, which means you can be using any other app while this script simply checks for changes in your followers.\
@@ -23,4 +24,3 @@ Once it finds them, it will show a notification explaining what it found. It als
 1. Install requirements: `pip install -r requirements.txt`
 1. Run the setup file: `startup.py`
 1. Run the bot: `python main.pyw`
-
