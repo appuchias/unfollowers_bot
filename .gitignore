@@ -1,7 +1,7 @@
 sessions
 .env
 
-followers.txt
-unfollowers.txt
+followers.json
+unfollowers.json
 usernames.txt
 
