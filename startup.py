@@ -5,8 +5,6 @@ from dotenv import load_dotenv
 # Main function
 def main():
     """Main function"""
-    if not os.path.exists("./files/"):
-        os.mkdir("files")
 
     if not os.path.exists("./usernames.txt"):
         open("usernames.txt", "x").close()
