@@ -11,12 +11,17 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DELAY = 25  # Cooldown between follower checks in minutes
+DELAY = 40  # Cooldown between follower checks in minutes
+
+# Get the accounts to track followers
+def get_tracker_accounts():
+    pass
+
 
 # Log in function
-def login():
+def login(username, password):
     ig = Instagram()
-    ig.with_credentials(getenv("LOGIN"), getenv("PASSWORD"))
+    ig.with_credentials(username, password)
     ig.login()
 
     return ig
@@ -30,11 +35,11 @@ def get_followers(ig, account):
         int(account.followed_by_count / 100) + (account.followed_by_count % 100 > 0)
     ) * 100
     print(
-        "    Estimated "
+        "    (Over) estimated "
         + str(count)
         + " followers (~"
         + str(round(count / 10 / 60, 1))
-        + " minutes)"
+        + " minutes to load)"
     )
 
     try:
@@ -87,9 +92,9 @@ def main(ig, account):
     print(
         "    Found "
         + str(len(followers_usernames))
-        + " followers -> ±"
+        + " followers -> +"
         + str(len(new_followers))
-        + ((" -> [" + " ".join(new_followers) + "]") if new_followers else "")
+        + ((" [" + " ".join(new_followers) + "]") if new_followers else "")
     )
 
     # Get unfollowers
@@ -98,7 +103,7 @@ def main(ig, account):
             current_time = str(datetime.now())
             unfollowers[account.username][current_time] = []
             unfollowers[account.username][current_time].append(user)
-            print("    Unfollower -> @" + user + " [@" + account.username + "]")
+            print("    Unfollower -> @" + user)
 
     # Write save files
     with open("followers.json", "w") as w:
@@ -116,7 +121,7 @@ def loop():
     check = 0
 
     print("Starting up...")
-    ig = login()
+    ig = login(getenv("LOGIN"), getenv("PASSWORD"))
 
     sleep(randint(1, 10))
     os.system("cls" if os.name == "nt" else "clear")
@@ -138,7 +143,7 @@ def loop():
                 print("@" + username.strip())
                 account = ig.get_account(username.strip())
                 main(ig, account)
-                print("*-* " * 6)  # *-* *-* *-*
+                print("*-* " * 10)  # *-* *-* *-*
 
             true_delay = randint(DELAY - 10, DELAY + 10)
             print("Delay: " + str(true_delay) + "min\n")
