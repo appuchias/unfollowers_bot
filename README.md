@@ -4,7 +4,7 @@
 ![Size](https://img.shields.io/github/repo-size/appuchias/unfollowers_tracker?color=orange&style=flat-square)
 
 # How it works
-Bot to monitor instagram followers of one or many accounts. You'll need an extra account to track the followers and it will get banned at some point. To see a more advanced version of this software please contact me.
+Bot to monitor instagram followers of one or many accounts. You'll need an extra account to track the followers and it will get banned at some point. ~To see a more advanced version of this software please contact me.~
 
 # Setup
 ### **IMPORTANT NOTE**: *Create a secondary account for this. It will get banned at some point (suspicious operations) so please DON'T use your main account for this.*
